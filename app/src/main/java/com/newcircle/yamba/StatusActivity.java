@@ -1,6 +1,8 @@
 package com.newcircle.yamba;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +17,15 @@ public class StatusActivity extends Activity implements StatusFragment.OnFragmen
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_status);
+
+        if (savedInstanceState == null) {
+            StatusFragment frag = StatusFragment.newInstance(null, null);
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+
+            ft.add(R.id.frag_container, frag, frag.getClass().getName());
+            ft.commit();
+        }
     }
 
 

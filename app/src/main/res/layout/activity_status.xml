@@ -4,11 +4,4 @@
     android:layout_height="match_parent"
     android:id="@+id/frag_container"
     tools:context=".StatusActivity">
-
-    <fragment
-        android:name="com.newcircle.yamba.StatusFragment"
-        android:id="@+id/status_frag"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        tools:layout="@layout/fragment_status" />
 </FrameLayout>
