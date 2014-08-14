@@ -2,11 +2,12 @@ package com.newcircle.yamba;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -185,8 +186,15 @@ public class StatusFragment extends Fragment implements  View.OnClickListener, T
         protected String doInBackground(String... params) {
             String status = params[0];
             String result;
+            String username;
+            String password;
+            Activity act = getActivity();
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(act);
 
-            YambaClient client = new YambaClient("student", "password");
+            username = prefs.getString(act.getString(R.string.keyUserName), "");
+            password = prefs.getString(act.getString(R.string.keyUserPW), "");
+
+            YambaClient client = new YambaClient(username, password);
             try {
                 client.postStatus(status);
             } catch (YambaClientException e) {

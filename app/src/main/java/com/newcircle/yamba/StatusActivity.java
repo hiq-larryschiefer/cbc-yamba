@@ -43,14 +43,27 @@ public class StatusActivity extends Activity implements StatusFragment.OnFragmen
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        boolean ret = false;
+
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            return true;
+            YambaPrefsFragment prefFrag = new YambaPrefsFragment();
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.frag_container, prefFrag, "pref_frag");
+            ft.addToBackStack("pref_frag");
+            ft.commit();
+            ret = true;
         }
-        return super.onOptionsItemSelected(item);
+
+        if (!ret) {
+            ret = super.onOptionsItemSelected(item);
+        }
+
+        return ret;
     }
 
     @Override
